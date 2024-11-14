@@ -59,3 +59,22 @@ plt.ylabel('Cantidad de Animales', fontsize=12)
 # Mostrar el gráfico
 plt.tight_layout()
 plt.show()
+
+# Crear el gráfico de evolución de la cantidad total de animales por provincia
+plt.figure(figsize=(12, 8))
+
+# Sumamos el total de animales por 'año' y 'provincia'
+df_provincia = df.groupby(['año', 'provincia'])['total_animales'].sum().reset_index()
+
+# Usamos seaborn para crear un gráfico de líneas para cada provincia
+sns.lineplot(data=df_provincia, x='año', y='total_animales', hue='provincia', markers=True)
+
+# Agregamos detalles al gráfico
+plt.title('Evolución de la Cantidad de Animales por Año y Provincia', fontsize=16)
+plt.xlabel('Año', fontsize=12)
+plt.ylabel('Total de Animales', fontsize=12)
+
+# Ajustamos la leyenda y mostramos el gráfico
+plt.legend(title='Provincia', bbox_to_anchor=(1.05, 1), loc='upper left')
+plt.tight_layout()
+plt.show()
